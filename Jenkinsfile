@@ -28,12 +28,10 @@ pipeline {
 			agent {
 				label 'apache'
 			}
-			if (!fileExists("/var/www/html/rectangles/all/${env.BRANCH_NAME}")) {
-				steps {
+			steps {
+				if (!fileExists("/var/www/html/rectangles/all/${env.BRANCH_NAME}")) {
 					sh "mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}"
 				}
-			}
-			steps {
 				sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}"
 			}
 		}
